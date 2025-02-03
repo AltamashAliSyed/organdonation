@@ -1,0 +1,5 @@
+<div class="user">
+    {% csrf_token %}
+    <h2>{{user.username}}</h2>
+</div>
+<a href="{% url 'logout' %}">logout</a>

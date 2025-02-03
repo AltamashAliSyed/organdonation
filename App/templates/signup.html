@@ -1,0 +1,22 @@
+<div class="message">
+    {% if messages %}
+    {% for message in messages %}
+        <p> {{message}}</p>
+    {% endfor %}
+    {% endif %}
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="username">Username :</label>
+    <input type="text" name="username" id="username" required><br><br>
+
+    <label for="password">Password :</label>
+    <input type="password" name="password" id="password" required><br><br>
+
+    <label for="confirmpassword">Confirm Password :</label>
+    <input type="password" name="confirmpassword" id="confirmpassword" required><br><br>
+
+    <button type="submit">Submit</button>
+</form>
