@@ -114,14 +114,26 @@
     <div class="column">
         <div class="leftsection" onclick="location.href='{% url 'hospital' %}'" style="cursor: pointer;">
             <h3>Hospital</h3>
+            
         </div>
         
         <div class="rightsection" onclick="location.href='{% url 'donor' %}'" style="cursor: pointer;;">
             <h3>Donors</h3>
+            <a href="{% url 'donor_form' %}">Donorform</a>
             
         </div>
+    
     </div>
     <hr style="border:2px solid black">
+    {% for donors in donors %}
+    <h3>{{donors.name}}</h3>
+    <h3>{{donors.address}}</h3>
+    <h3>{{donors.age}}</h3>
+    <h3>{{donors.blood_grp}}</h3>
+    <h3>{{donors.organ_name}}</h3>
+    <h3>{{donors.city}}</h3>
+    <a href="tel:donors.contact_number">{{donors.contact_number}}</a>
+    {% endfor %}
 
 
 </div>

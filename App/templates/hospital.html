@@ -1,0 +1,221 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Dancing+Script:wght@600&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Faculty+Glyphic&family=Lora:ital,wght@0,400..700;1,400..700&family=Playwrite+AU+VIC+Guides&family=Playwrite+IT+Moderna+Guides&family=Rowdies:wght@300;400;700&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+
+
+
+<style>
+    body{
+        height: 90vh;
+        width: 100%;
+    }
+
+    
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        background-color: #333;
+        color: white;
+        position: fixed;
+        top: 0;
+        left: -250px;
+        transition: left 0.3s ease;
+        padding-top: 50px;
+        padding-left: 15px;
+    }
+
+    .sidebar a {
+        margin-top: 20px;
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        border-bottom: 1px solid #444;
+    }
+
+    .sidebar a:hover {
+        background-color: #555;
+    }
+
+    
+    .toggle-btn {
+        position: absolute;
+        top: 0;
+        left: 20px;
+        background-color: #333;
+        color: white;
+        padding: 10px 15px;
+        cursor: pointer;
+        border: none;
+        font-size: 20px;
+        z-index: 2000;
+
+        
+    }
+    .main{
+        position: relative;
+        top: 50px;
+        width: 100%;
+                    
+    }
+    .leftsection{
+        
+        float: left;
+        
+        width: 50% auto;
+                
+    }
+    .rightsection{
+        
+        float: right;
+        width: 50% auto;
+       
+        
+
+    }
+    
+    .column{
+        
+        display: flex;
+        justify-content: center;
+        gap: 400px;
+        text-align: center;
+        
+        
+        
+    }
+
+    .hospitalform{
+        border: dotted 1px black;
+        display: flex;
+        justify-content: center;
+        border-radius: 20px;
+        font-family: "Barlow Semi Condensed", serif;
+        font-weight: 100;
+        font-style: normal;
+
+    }
+    .hospitalform a{
+        text-decoration: none;
+        text-align: center;
+        font-size: 30px;
+        color: mediumblue;
+        
+
+    
+    }
+    .hospitalform a:hover {
+        text-decoration: none;
+        text-align: center;
+        font-size: 30px;
+        color: red;
+        
+    }
+    .hospitalinfo{
+        border: dotted 1px black;
+        padding: 20px 20px;
+        border-radius: 30px;
+
+    }
+    .hospitalinfo h1{
+        text-align: center;
+        font-family: "Barlow Semi Condensed", serif;
+        font-weight: 100;
+        font-style: normal;
+
+    }
+    
+    
+</style>
+
+
+    <button class="toggle-btn" onclick="toggleSidebar()">☰ </button>
+
+
+    <div class="sidebar" id="sidebar">
+        <a href="{% url 'home'%}">Home</a><br>
+        <a href="{% url 'logout' %}">Logout</a><br>
+        
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            if (sidebar.style.left === "-250px") {
+                sidebar.style.left = "0px";  // Open sidebar
+            } else {
+                sidebar.style.left = "-250px"; // Close sidebar
+            }
+        }
+    </script>
+
+
+
+
+
+<div class="main">
+    <hr style="border:2px solid black">
+    <div class="column">
+        <div class="leftsection" onclick="location.href='{% url 'hospital' %}'" style="cursor: pointer;">
+            <h3>Hospital</h3>
+        
+        </div>
+        
+        <div class="rightsection" onclick="location.href='{% url 'donor' %}'" style="cursor: pointer;;">
+            <h3>Donors</h3>
+            
+        </div>
+    </div>
+    <hr style="border:2px solid black">
+
+    <div class="hospitalform">
+        <a href="{% url 'hospital_form' %}">Hospital Form</a>
+    </div>
+    <br>
+    <div class="hospitalinfo">{% for hospital in hospital %}
+        <h1>{{hospital.hospital_name}}</h1>
+        <h3>
+            <a href="https://www.google.com/maps/dir/?api=1&destination={{ hospital.hospital_address }}" target="_blank">
+                {{ hospital.hospital_address }}
+            </a>
+        </h3>
+        <a href="tel:{{ hospital.hospital_phonenumber }}">{{ hospital.hospital_phonenumber }}</a>
+        
+        {% endfor %}
+    </div>
+    <!--<input type="search-input" type="text" placeholder="type hospital">
+    <button onclick="searchdata()">Search</button>
+    <div id="search-results"></div>-->
+    
+
+
+</div>
+
+<!--<script>
+    function searchdata() {
+        let query = $("#search-input").val().trim();
+        if (!query) return;
+
+        $.ajax({
+            url: "/search/",
+            type: "GET",
+            data: { query: query },
+            success: function(response) {
+                let results = response.results;
+                let display = results.length 
+                    ? results.map(item => Object.values(item).join(", ")).join("<br>") 
+                    : "No results found.";
+                $("#search-results").html(display);
+            }
+        });
+    }
+</script>-->
+
+
+
+
